@@ -14,7 +14,7 @@ Then, on a system with `GnuPG` installed, run
 
 `gpg --keyserver-options auto-key-retrieve --verify archlinux-*version*-x86_64.iso.sig`
 
-to check a specific Arch Linux *version*. To verify the authenticity of the signature also ensure that the public key fingerprint as printed above matches the key fingerprint of the (developer who signed the ISO-file as listed here)[https://archlinux.org/people/developers/].
+to check a specific Arch Linux *version*. To verify the authenticity of the signature also ensure that the public key fingerprint as printed above matches the key fingerprint of the [developer who signed the ISO-file as listed here](https://archlinux.org/people/developers/).
 
 ### Booting
 
