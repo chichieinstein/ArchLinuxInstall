@@ -1,6 +1,6 @@
 # ArchLinuxInstall
 
-## This is a set of instructions for installing Arch Linux on personal machines.
+## Instructions for basic Arch installation
 
 ### Creating the install medium
 
@@ -186,6 +186,25 @@ Then, `exit` the chroot environment.
 `unmount -R /mnt`
 
 `reboot`
+
+## Post installation customization and fine tuning
+
+### Managing internet connections
+
+Network Manager is a good way to orchestrate and connect with wired/wireless connections. However, a choice has to be made for the backend for this as multiple such services exist, and if all of them are active simultaneously the system won't be able to connect to the internet.
+
+We follow here the process of setting `iwd` (which we used during installation) as the backend for Network Manager.
+
+`touch /etc/NetworkManager/conf.d/wifi_backend.conf`
+
+Edit this file to have the content
+
+```
+[device]
+wifi.backend=iwd
+```
+Next, Network manager has a CLI version named `nmcli` that can be used to create and modify internet connections to the device.
+
 
 
 
