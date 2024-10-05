@@ -58,21 +58,21 @@ Now, list all available devices in this prompt by
 
 `[iwd]# device list`
 
-Turn a specific listed adapter on (if its off) using
+Turn a specific listed adapter whose name is `NAME` on (if its off) using
 
-`[iwd]# device *name* set-property Powered on`
+`[iwd]# device NAME set-property Powered on`
 
 Next, initiate a scan of available networks using
 
-`[iwd]# station *name* scan`
+`[iwd]# station NAME scan`
 
 List all available networks using
 
-`[iwd]# station *name* get-networks`
+`[iwd]# station NAME get-networks`
 
-Finally connect to a network using
+Finally connect to a network whose name is `SSID` using
 
-`[iwd]# station *name* connect *SSID*`
+`[iwd]# station NAME connect SSID`
 
 You will be prompted for the Wifi password if its a private network. Once connected, exit the prompt by typing `exit` to return to the interactive console.
 
@@ -154,6 +154,42 @@ and then enter the password you want.
 ### Bootloader (Be careful else you wont be able to boot into your Arch Linux installation)
 
 There are a variety of boot loaders available. We pick `grub` as it is the most familiar for users of Ubuntu.
+
+We follow these steps to get the boot loader up and running.
+
+#### Install pre-requisites
+
+`pacman -S grub`
+`pacman -S efibootmgr`
+
+#### Mount the EFI system partition
+
+`mount /dev/root_partition /mnt`
+`mount /dev/efi_system_partition /mnt/boot`
+
+You can choose specific mount points for the root and efi system partitions. We follow these mount points for illustrative purposes.
+
+Next, we chroot
+
+`arch-chroot /mnt`
+
+Now run the grub install
+
+`grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub`
+
+Generate config files using
+
+`grub mkconfig -o /boot/grub/grub.cfg`
+
+Then, `exit` the chroot environment.
+
+`unmount -R /mnt`
+
+`reboot`
+
+
+
+
 
 
 
